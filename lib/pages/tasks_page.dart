@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workflow/Notifiers/task_notifier.dart';
 import 'package:workflow/components/my_textfield.dart';
+import 'package:workflow/pages/execution_page.dart';
 import '../models/task.dart';
 
 class WorkflowTasksPage extends ConsumerWidget {
@@ -280,9 +281,33 @@ class WorkflowTasksPage extends ConsumerWidget {
                 ),
               ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _showTaskForm(context, ref),
-        child: Icon(Icons.add),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: FloatingActionButton(
+              heroTag: 'addButton',
+              onPressed: () => _showTaskForm(context, ref),
+              child: Icon(Icons.add),
+            ),
+          ),
+          FloatingActionButton(
+            heroTag: 'playButton',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WorkflowExecutionPage(
+                    workflowId: workflowId,
+                    workflowName: workflowName,
+                  ),
+                ),
+              );
+            },
+            child: Icon(Icons.play_arrow),
+          ),
+        ],
       ),
     );
   }

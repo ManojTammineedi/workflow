@@ -38,6 +38,7 @@ dependencies:
   sqflite:
   flutter_riverpod:
   google_fonts: ^4.0.4
+  intl:
 
 dev_dependencies:
   flutter_test:
